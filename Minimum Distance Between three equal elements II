@@ -1,0 +1,18 @@
+from collections import defaultdict
+from typing import List
+
+class Solution:
+    def minimumDistance(self, nums: List[int]) -> int:
+        pos = defaultdict(list)
+        
+        for i, x in enumerate(nums):
+            pos[x].append(i)
+        
+        ans = float('inf')
+        
+        for v in pos.values():
+            if len(v) >= 3:
+                for i in range(len(v) - 2):
+                    ans = min(ans, 2 * (v[i+2] - v[i]))
+        
+        return ans if ans != float('inf') else -1
